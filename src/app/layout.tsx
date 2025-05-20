@@ -1,18 +1,22 @@
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
 import './globals.css';
-import { ReactNode } from 'react';
 
-export const metadata = {
-  title: 'Bernard Haryanto',
-  description: 'Personal website of Bernard Haryanto',
+const inter = Inter({ subsets: ['latin'] });
+
+export const metadata: Metadata = {
+  title: 'Bernard Haryanto | Portfolio',
+  description: 'Personal website of Bernard Haryanto, Software Developer',
 };
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
     <html lang="en">
-      <body className="bg-[#040613]">
-        {/* <Navbar /> */}
-        {children}
-      </body>
+      <body className={inter.className}>{children}</body>
     </html>
   );
 }
