@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { FaLinkedin, FaGithub, FaEnvelope, FaFileAlt } from 'react-icons/fa';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 // Import the profile image
 import profileImage from '../../public/profile.jpeg';
@@ -12,22 +12,42 @@ export default function Home() {
   // Add state to track active tab: 'work', 'education', or 'projects'
   const [activeTab, setActiveTab] = useState('work');
   
+  // Add state for screen size
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Effect to detect screen size
+  useEffect(() => {
+    const checkIsMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    // Initial check
+    checkIsMobile();
+    
+    // Add event listener for window resize
+    window.addEventListener('resize', checkIsMobile);
+    
+    // Cleanup
+    return () => window.removeEventListener('resize', checkIsMobile);
+  }, []);
+  
   // Define reusable styles
   const styles = {
     // Layout styles
     container: {
       maxWidth: '900px', 
       margin: '0 auto', 
-      padding: '0', 
+      padding: isMobile ? '0 16px' : '0', 
       display: 'flex',
       flexDirection: 'column' as const,
-      gap: '48px'
+      gap: isMobile ? '32px' : '48px'
     },
     section: {
       display: 'flex', 
+      flexDirection: isMobile ? 'column' as const : 'row' as const,
       justifyContent: 'space-between',
-      alignItems: 'flex-start',
-      gap: '48px'
+      alignItems: isMobile ? 'center' as const : 'flex-start' as const,
+      gap: isMobile ? '32px' : '48px'
     },
     
     // Text styles
@@ -49,7 +69,7 @@ export default function Home() {
     card: {
       backgroundColor: '#f8f8f8',
       borderRadius: '8px',
-      padding: '24px',
+      padding: isMobile ? '16px' : '24px',
       border: '1px solid #e1e1e1',
       marginBottom: '16px'
     },
@@ -57,11 +77,11 @@ export default function Home() {
     // Tab styles
     tabButton: (isActive: boolean) => ({
       flex: 1,
-      padding: '12px 24px',
+      padding: isMobile ? '10px 12px' : '12px 24px',
       backgroundColor: isActive ? '#f0f0f0' : 'transparent',
       border: 'none',
       color: isActive ? '#222222' : '#777777',
-      fontSize: '16px',
+      fontSize: isMobile ? '14px' : '16px',
       fontWeight: '500',
       cursor: 'pointer',
       transition: 'background-color 0.2s, color 0.2s'
@@ -74,7 +94,7 @@ export default function Home() {
       margin: 0
     },
     listItem: {
-      fontSize: '15px',
+      fontSize: isMobile ? '14px' : '15px',
       color: '#555555',
       marginBottom: '8px',
       paddingLeft: '20px',
@@ -138,6 +158,15 @@ export default function Home() {
       color: '#222222',
       textDecoration: 'none',
     },
+
+    // Hero image container
+    heroImageContainer: {
+      width: isMobile ? '240px' : '320px',
+      height: isMobile ? '300px' : '400px',
+      borderRadius: '8px',
+      position: 'relative' as const,
+      overflow: 'hidden'
+    },
   };
   
   return (
@@ -145,7 +174,7 @@ export default function Home() {
       backgroundColor: 'white', 
       color: '#222222', 
       minHeight: '100vh',
-      paddingTop: '48px'
+      paddingTop: isMobile ? '24px' : '48px'
     }}>
       <div style={styles.container}>
         
@@ -153,7 +182,10 @@ export default function Home() {
         <section style={styles.section}>
           {/* Left content (heading, bio, links) */}
           <div style={{ flex: '1' }}>
-            <h1 style={styles.heading}>
+            <h1 style={{
+              ...styles.heading,
+              fontSize: isMobile ? '2.5rem' : '3.5rem',
+            }}>
               Bernard Haryanto
             </h1>
             
@@ -169,7 +201,8 @@ export default function Home() {
             <div style={{ 
               display: 'flex', 
               gap: '12px',
-              margin: '24px 0'
+              margin: '24px 0',
+              flexWrap: isMobile ? 'wrap' : 'nowrap',
             }}>
               <a 
                 href="/Bernard_Haryanto_Resume_2025.docx" 
@@ -209,30 +242,20 @@ export default function Home() {
           </div>
           
           {/* Right content (profile image) */}
-          <div style={{ 
-            width: '320px',
-            height: '400px'
-          }}>
-            <div style={{
-              width: '100%',
-              height: '100%',
-              borderRadius: '8px',
-              overflow: 'hidden',
-              backgroundColor: '#f0f0f0',
-              position: 'relative',
-              boxShadow: '0 4px 8px rgba(0,0,0,0.1)'
-            }}>
-              <Image 
-                src={profileImage}
-                alt="profile picture"
-                fill
-                style={{ 
-                  objectFit: 'cover',
-                  objectPosition: 'center'
-                }}
-                priority
-              />
-            </div>
+          <div style={styles.heroImageContainer}>
+            <Image 
+              src={profileImage}
+              alt="profile picture"
+              fill
+              style={{ 
+                objectFit: 'cover',
+                objectPosition: 'center',
+                width: '100%',
+                height: '100%',
+                borderRadius: '8px',
+              }}
+              priority
+            />
           </div>
         </section>
         
@@ -242,7 +265,7 @@ export default function Home() {
           marginBottom: '64px'
         }}>
           {/* Tab Buttons */}
-          <div style={{
+          <div id="projects" style={{
             display: 'flex',
             borderRadius: '8px',
             overflow: 'hidden',
@@ -259,7 +282,7 @@ export default function Home() {
               onClick={() => setActiveTab('education')}
               style={styles.tabButton(activeTab === 'education')}
             >
-              Education
+              {isMobile ? 'Edu' : 'Education'}
             </button>
             <button 
               onClick={() => setActiveTab('projects')}
@@ -281,29 +304,32 @@ export default function Home() {
                 <div style={{
                   display: 'flex',
                   alignItems: 'flex-start',
-                  gap: '16px'
+                  gap: isMobile ? '12px' : '16px'
                 }}>
                   {/* Company Logo */}
                   <div style={styles.logoContainer}>
                     <Image 
                       src={cititrailsImage} 
                       alt="CitiTrails" 
-                      width={48} 
-                      height={48} 
+                      width={isMobile ? 40 : 48} 
+                      height={isMobile ? 40 : 48} 
                     />
                   </div>
                   
                   {/* Job Details */}
                   <div style={{ flex: 1 }}>
                     <div style={{
-                      fontSize: '14px',
+                      fontSize: isMobile ? '12px' : '14px',
                       color: '#777777',
                       marginBottom: '4px'
                     }}>
                       Feb 2025 - Present | Sydney
                     </div>
                     
-                    <h3 style={styles.title}>
+                    <h3 style={{
+                      ...styles.title,
+                      fontSize: isMobile ? '18px' : '20px',
+                    }}>
                       <a 
                         href="https://cititrails.com" 
                         target="_blank" 
@@ -320,7 +346,7 @@ export default function Home() {
                     </h3>
                     
                     <div style={{
-                      fontSize: '16px',
+                      fontSize: isMobile ? '14px' : '16px',
                       color: '#555555',
                       marginBottom: '16px'
                     }}>
@@ -371,7 +397,7 @@ export default function Home() {
                 <div style={{
                   display: 'flex',
                   alignItems: 'flex-start',
-                  gap: '16px'
+                  gap: isMobile ? '12px' : '16px'
                 }}>
                   {/* University Logo */}
                   <div style={styles.logoContainer}>
@@ -398,12 +424,15 @@ export default function Home() {
                       2022 - Present | Sydney
                     </div>
                     
-                    <h3 style={styles.title}>
+                    <h3 style={{
+                      ...styles.title,
+                      fontSize: isMobile ? '18px' : '20px',
+                    }}>
                       University of New South Wales
                     </h3>
                     
                     <div style={{
-                      fontSize: '16px',
+                      fontSize: isMobile ? '14px' : '16px',
                       color: '#555555',
                       marginBottom: '16px'
                     }}>
@@ -434,7 +463,7 @@ export default function Home() {
                 <div style={{
                   display: 'flex',
                   alignItems: 'flex-start',
-                  gap: '16px'
+                  gap: isMobile ? '12px' : '16px'
                 }}>
                   {/* Project Logo/Image */}
                   <div style={{
@@ -465,7 +494,10 @@ export default function Home() {
                       April 2025 - Present | Sydney
                     </div>
                     
-                    <h3 style={styles.title}>
+                    <h3 style={{
+                      ...styles.title,
+                      fontSize: isMobile ? '18px' : '20px',
+                    }}>
                       <a 
                         href="https://github.com/bernardh77/TeamCheckr" 
                         target="_blank" 
@@ -524,7 +556,7 @@ export default function Home() {
                 <div style={{
                   display: 'flex',
                   alignItems: 'flex-start',
-                  gap: '16px'
+                  gap: isMobile ? '12px' : '16px'
                 }}>
                   {/* Project Logo/Image */}
                   <div style={{
@@ -555,7 +587,10 @@ export default function Home() {
                       Sept 2024 - Dec 2024 | Sydney
                     </div>
                     
-                    <h3 style={styles.title}>
+                    <h3 style={{
+                      ...styles.title,
+                      fontSize: isMobile ? '18px' : '20px',
+                    }}>
                       Eventhubb – COMP3900 Capstone Project
                     </h3>
                     
@@ -598,7 +633,7 @@ export default function Home() {
                 <div style={{
                   display: 'flex',
                   alignItems: 'flex-start',
-                  gap: '16px'
+                  gap: isMobile ? '12px' : '16px'
                 }}>
                   {/* Project Logo/Image */}
                   <div style={{
@@ -629,7 +664,10 @@ export default function Home() {
                       March 2024 | Sydney
                     </div>
                     
-                    <h3 style={styles.title}>
+                    <h3 style={{
+                      ...styles.title,
+                      fontSize: isMobile ? '18px' : '20px',
+                    }}>
                       <a 
                         href="https://github.com/bernardh77/GroupedIn" 
                         target="_blank" 
@@ -684,7 +722,7 @@ export default function Home() {
                 <div style={{
                   display: 'flex',
                   alignItems: 'flex-start',
-                  gap: '16px'
+                  gap: isMobile ? '12px' : '16px'
                 }}>
                   {/* Project Logo/Image */}
                   <div style={{
@@ -715,7 +753,10 @@ export default function Home() {
                       Oct 2023 - Nov 2023 | Sydney
                     </div>
                     
-                    <h3 style={styles.title}>
+                    <h3 style={{
+                      ...styles.title,
+                      fontSize: isMobile ? '18px' : '20px',
+                    }}>
                       <a 
                         href="https://github.com/bernardh77/airbrb" 
                         target="_blank" 

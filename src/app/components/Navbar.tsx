@@ -1,9 +1,28 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { FiSun } from 'react-icons/fi';
 
 export default function Navbar() {
+  // State to detect mobile screen size
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Effect to detect screen size
+  useEffect(() => {
+    const checkIsMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    // Initial check
+    checkIsMobile();
+    
+    // Add event listener for window resize
+    window.addEventListener('resize', checkIsMobile);
+    
+    // Cleanup
+    return () => window.removeEventListener('resize', checkIsMobile);
+  }, []);
+
   // Define styles as objects to match tedawf.com precisely
   const navStyle = {
     backgroundColor: '#F8F8F8',
@@ -18,7 +37,7 @@ export default function Navbar() {
     width: '100%',
     maxWidth: '900px',
     margin: '0 auto',
-    padding: '0',
+    padding: isMobile ? '0 16px' : '0',
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center'
@@ -31,9 +50,9 @@ export default function Navbar() {
 
   const linkStyle = {
     color: 'black',
-    fontSize: '18px',
+    fontSize: isMobile ? '16px' : '18px',
     textDecoration: 'none',
-    marginRight: '48px',
+    marginRight: isMobile ? '24px' : '48px',
     fontWeight: '400',
     letterSpacing: '0.5px'
   } as React.CSSProperties;
@@ -53,7 +72,7 @@ export default function Navbar() {
       <div style={containerStyle}>
         <div style={linkContainerStyle}>
           <a href="#" style={linkStyle}>home</a>
-          <a href="#" style={linkStyle}>projects</a>
+          <a href="#projects" style={linkStyle}>projects</a>
         </div>
         <div style={iconContainerStyle}>
           <FiSun style={sunIconStyle} />
