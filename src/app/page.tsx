@@ -1,11 +1,12 @@
 'use client';
 
 import Image from 'next/image';
-import { FaLinkedin, FaGithub, FaEnvelope, FaFileAlt } from 'react-icons/fa';
+import { FaLinkedin, FaGithub, FaEnvelope, FaFileAlt, FaMoon, FaSun } from 'react-icons/fa';
 import { useState, useEffect } from 'react';
 
 // Import the profile image
-import profileImage from '../../public/profile.jpeg';
+import profilePictureDay from '../../public/profile-day.jpg';
+import profilePictureNight from '../../public/profile-night.jpeg';
 import cititrailsImage from '../../public/cititrails.jpeg';
 
 export default function Home() {
@@ -14,6 +15,9 @@ export default function Home() {
   
   // Add state for screen size
   const [isMobile, setIsMobile] = useState(false);
+  
+  // Add state for dark mode
+  const [darkMode, setDarkMode] = useState(false);
 
   // Effect to detect screen size
   useEffect(() => {
@@ -31,23 +35,47 @@ export default function Home() {
     return () => window.removeEventListener('resize', checkIsMobile);
   }, []);
   
+  // Effect to handle dark mode
+  useEffect(() => {
+    // Check if user has a preference stored
+    const savedMode = localStorage.getItem('darkMode');
+    if (savedMode) {
+      setDarkMode(savedMode === 'true');
+    } else {
+      // Check if user prefers dark mode in their system settings
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      setDarkMode(prefersDark);
+    }
+  }, []);
+  
+  // Update when dark mode changes
+  useEffect(() => {
+    localStorage.setItem('darkMode', darkMode.toString());
+  }, [darkMode]);
+  
+  // Toggle dark mode
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+  };
+  
   // Define reusable styles
   const styles = {
     // Layout styles
     container: {
       maxWidth: '900px', 
       margin: '0 auto', 
-      padding: isMobile ? '0 16px' : '0', 
+      padding: isMobile ? '0 24px' : '0 32px', 
       display: 'flex',
       flexDirection: 'column' as const,
-      gap: isMobile ? '32px' : '48px'
+      gap: isMobile ? '40px' : '64px',
+      position: 'relative' as const
     },
     section: {
       display: 'flex', 
       flexDirection: isMobile ? 'column' as const : 'row' as const,
       justifyContent: 'space-between',
       alignItems: isMobile ? 'center' as const : 'flex-start' as const,
-      gap: isMobile ? '32px' : '48px'
+      gap: isMobile ? '40px' : '64px'
     },
     
     // Text styles
@@ -55,33 +83,37 @@ export default function Home() {
       fontSize: '3.5rem', 
       fontWeight: '800',
       lineHeight: '1.2',
-      margin: '0 0 16px 0',
-      color: '#222222'
+      margin: '0 0 24px 0',
+      color: darkMode ? '#ffffff' : '#222222'
     },
     paragraph: {
       fontSize: '18px', 
-      color: '#555555',
-      margin: '0 0 12px 0',
+      color: darkMode ? '#e5e7eb' : '#555555',
+      margin: '0 0 16px 0',
       lineHeight: '1.5'
     },
     
     // Card styles
     card: {
-      backgroundColor: '#f8f8f8',
+      backgroundColor: darkMode ? '#1e293b' : '#f8f8f8',
       borderRadius: '8px',
-      padding: isMobile ? '16px' : '24px',
-      border: '1px solid #e1e1e1',
-      marginBottom: '16px'
+      padding: isMobile ? '24px' : '32px',
+      border: `1px solid ${darkMode ? '#334155' : '#e1e1e1'}`,
+      marginBottom: '24px'
     },
     
     // Tab styles
     tabButton: (isActive: boolean) => ({
       flex: 1,
-      padding: isMobile ? '10px 12px' : '12px 24px',
-      backgroundColor: isActive ? '#f0f0f0' : 'transparent',
+      padding: isMobile ? '14px 16px' : '16px 28px',
+      backgroundColor: isActive 
+        ? darkMode ? '#334155' : '#f0f0f0' 
+        : darkMode ? '#1a2234' : 'transparent',
       border: 'none',
-      color: isActive ? '#222222' : '#777777',
-      fontSize: isMobile ? '14px' : '16px',
+      color: isActive 
+        ? darkMode ? '#ffffff' : '#222222' 
+        : darkMode ? '#a3b1cc' : '#777777',
+      fontSize: isMobile ? '15px' : '16px',
       fontWeight: '500',
       cursor: 'pointer',
       transition: 'background-color 0.2s, color 0.2s'
@@ -91,14 +123,15 @@ export default function Home() {
     list: {
       listStyleType: 'none',
       padding: 0,
-      margin: 0
+      margin: '8px 0 0 0'
     },
     listItem: {
       fontSize: isMobile ? '14px' : '15px',
-      color: '#555555',
-      marginBottom: '8px',
+      color: darkMode ? '#f1f5f9' : '#555555',
+      marginBottom: '12px',
       paddingLeft: '20px',
-      position: 'relative' as const
+      position: 'relative' as const,
+      lineHeight: '1.6'
     },
     listItemDot: {
       position: 'absolute' as const,
@@ -106,7 +139,7 @@ export default function Home() {
       top: '8px',
       width: '4px',
       height: '4px',
-      backgroundColor: '#555555',
+      backgroundColor: darkMode ? '#e2e8f0' : '#555555',
       borderRadius: '50%'
     },
     
@@ -115,13 +148,13 @@ export default function Home() {
       width: '48px',
       height: '48px',
       borderRadius: '4px',
-      backgroundColor: 'white',
+      backgroundColor: darkMode ? '#334155' : 'white',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
       overflow: 'hidden',
       padding: '0',
-      boxShadow: '0 1px 3px rgba(0,0,0,0.1)'
+      boxShadow: `0 1px 3px ${darkMode ? 'rgba(0,0,0,0.3)' : 'rgba(0,0,0,0.1)'}`
     },
     
     // Link styles
@@ -131,7 +164,7 @@ export default function Home() {
       padding: '8px',
       borderRadius: '4px',
       backgroundColor: 'transparent',
-      color: '#555555',
+      color: darkMode ? '#e5e7eb' : '#555555',
       textDecoration: 'none'
     },
     primaryButton: {
@@ -152,31 +185,61 @@ export default function Home() {
       fontSize: '20px',
       fontWeight: '600',
       margin: '0 0 8px 0',
-      color: '#222222'
+      color: darkMode ? '#ffffff' : '#222222'
     },
     titleLink: {
-      color: '#222222',
+      color: darkMode ? '#ffffff' : '#222222',
       textDecoration: 'none',
     },
 
     // Hero image container
     heroImageContainer: {
-      width: isMobile ? '240px' : '320px',
-      height: isMobile ? '300px' : '400px',
-      borderRadius: '8px',
+      width: isMobile ? '260px' : '340px',
+      height: isMobile ? '320px' : '420px',
+      borderRadius: '12px',
       position: 'relative' as const,
-      overflow: 'hidden'
+      overflow: 'hidden',
+      boxShadow: `0 8px 24px ${darkMode ? 'rgba(0,0,0,0.5)' : 'rgba(0,0,0,0.12)'}`
     },
+    
+    // Dark mode toggle
+    darkModeToggle: {
+      position: 'absolute' as const,
+      top: '0',
+      right: isMobile ? '24px' : '32px',
+      background: 'none',
+      border: 'none',
+      color: darkMode ? '#ffffff' : '#222222',
+      fontSize: '20px',
+      cursor: 'pointer',
+      padding: '8px',
+      borderRadius: '50%',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      zIndex: 10,
+      transition: 'color 0.3s ease, background-color 0.3s ease',
+    }
   };
   
   return (
     <main style={{ 
-      backgroundColor: 'white', 
-      color: '#222222', 
+      backgroundColor: darkMode ? '#0f172a' : 'white', 
+      color: darkMode ? '#ffffff' : '#222222', 
       minHeight: '100vh',
-      paddingTop: isMobile ? '24px' : '48px'
+      paddingTop: isMobile ? '40px' : '64px',
+      paddingBottom: isMobile ? '40px' : '64px',
+      transition: 'background-color 0.3s ease, color 0.3s ease'
     }}>
       <div style={styles.container}>
+        {/* Dark Mode Toggle */}
+        <button 
+          onClick={toggleDarkMode} 
+          style={styles.darkModeToggle}
+          aria-label={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+        >
+          {darkMode ? <FaSun size={20} /> : <FaMoon size={20} />}
+        </button>
         
         {/* Hero Section */}
         <section style={styles.section}>
@@ -193,15 +256,15 @@ export default function Home() {
               Software developer
             </p>
             
-            <p style={{...styles.paragraph, marginBottom: '36px', maxWidth: '500px'}}>
-              Final-year CS student at UNSW, Sydney 
+            <p style={{...styles.paragraph, marginBottom: '40px', maxWidth: '500px'}}>
+              Final-year CS student at UNSW 
             </p>
             
             {/* Buttons/Links */}
             <div style={{ 
               display: 'flex', 
-              gap: '12px',
-              margin: '24px 0',
+              gap: '16px',
+              margin: '32px 0',
               flexWrap: isMobile ? 'wrap' : 'nowrap',
             }}>
               <a 
@@ -244,7 +307,7 @@ export default function Home() {
           {/* Right content (profile image) */}
           <div style={styles.heroImageContainer}>
             <Image 
-              src={profileImage}
+              src={darkMode ? profilePictureNight : profilePictureDay}
               alt="profile picture"
               fill
               style={{ 
@@ -261,7 +324,7 @@ export default function Home() {
         
         {/* Work/Education/Projects Tabs */}
         <section style={{
-          marginTop: '16px',
+          marginTop: '24px',
           marginBottom: '64px'
         }}>
           {/* Tab Buttons */}
@@ -269,8 +332,8 @@ export default function Home() {
             display: 'flex',
             borderRadius: '8px',
             overflow: 'hidden',
-            marginBottom: '24px',
-            border: '1px solid #e1e1e1'
+            marginBottom: '32px',
+            border: `1px solid ${darkMode ? '#334155' : '#e1e1e1'}`
           }}>
             <button 
               onClick={() => setActiveTab('work')}
@@ -297,14 +360,14 @@ export default function Home() {
             <div style={{
               display: 'flex',
               flexDirection: 'column',
-              gap: '12px'
+              gap: '24px'
             }}>
               {/* CitiTrails */}
               <div style={styles.card}>
                 <div style={{
                   display: 'flex',
                   alignItems: 'flex-start',
-                  gap: isMobile ? '12px' : '16px'
+                  gap: isMobile ? '16px' : '20px'
                 }}>
                   {/* Company Logo */}
                   <div style={styles.logoContainer}>
@@ -320,8 +383,8 @@ export default function Home() {
                   <div style={{ flex: 1 }}>
                     <div style={{
                       fontSize: isMobile ? '12px' : '14px',
-                      color: '#777777',
-                      marginBottom: '4px'
+                      color: darkMode ? '#a3b1cc' : '#777777',
+                      marginBottom: '8px'
                     }}>
                       Feb 2025 - Present | Sydney
                     </div>
@@ -329,14 +392,16 @@ export default function Home() {
                     <h3 style={{
                       ...styles.title,
                       fontSize: isMobile ? '18px' : '20px',
+                      marginBottom: '12px'
                     }}>
                       <a 
                         href="https://cititrails.com" 
                         target="_blank" 
                         rel="noopener noreferrer" 
                         style={{
-                          color: '#222222', 
-                          textDecoration: 'none'
+                          color: darkMode ? '#ffffff' : '#222222', 
+                          textDecoration: 'none',
+                          fontWeight: '600'
                         }}
                         onMouseEnter={(e) => e.currentTarget.style.textDecoration = 'underline'}
                         onMouseLeave={(e) => e.currentTarget.style.textDecoration = 'none'}
@@ -347,8 +412,8 @@ export default function Home() {
                     
                     <div style={{
                       fontSize: isMobile ? '14px' : '16px',
-                      color: '#555555',
-                      marginBottom: '16px'
+                      color: darkMode ? '#e2e8f0' : '#555555',
+                      marginBottom: '24px'
                     }}>
                       Software Developer Intern
                     </div>
@@ -390,14 +455,14 @@ export default function Home() {
             <div style={{
               display: 'flex',
               flexDirection: 'column',
-              gap: '12px'
+              gap: '24px'
             }}>
               {/* UNSW */}
               <div style={styles.card}>
                 <div style={{
                   display: 'flex',
                   alignItems: 'flex-start',
-                  gap: isMobile ? '12px' : '16px'
+                  gap: isMobile ? '16px' : '20px'
                 }}>
                   {/* University Logo */}
                   <div style={styles.logoContainer}>
@@ -418,8 +483,8 @@ export default function Home() {
                   <div style={{ flex: 1 }}>
                     <div style={{
                       fontSize: '14px',
-                      color: '#777777',
-                      marginBottom: '4px'
+                      color: darkMode ? '#a3b1cc' : '#777777',
+                      marginBottom: '8px'
                     }}>
                       2022 - Present | Sydney
                     </div>
@@ -433,7 +498,7 @@ export default function Home() {
                     
                     <div style={{
                       fontSize: isMobile ? '14px' : '16px',
-                      color: '#555555',
+                      color: darkMode ? '#e2e8f0' : '#555555',
                       marginBottom: '16px'
                     }}>
                       Bachelor of Computer Science
@@ -456,14 +521,14 @@ export default function Home() {
             <div style={{
               display: 'flex',
               flexDirection: 'column',
-              gap: '12px'
+              gap: '24px'
             }}>
               {/* TeamCheckr */}
               <div style={styles.card}>
                 <div style={{
                   display: 'flex',
                   alignItems: 'flex-start',
-                  gap: isMobile ? '12px' : '16px'
+                  gap: isMobile ? '16px' : '20px'
                 }}>
                   {/* Project Logo/Image */}
                   <div style={{
@@ -489,7 +554,7 @@ export default function Home() {
                     <div style={{
                       fontSize: '14px',
                       color: '#777777',
-                      marginBottom: '4px'
+                      marginBottom: '8px'
                     }}>
                       April 2025 - Present | Sydney
                     </div>
@@ -497,15 +562,13 @@ export default function Home() {
                     <h3 style={{
                       ...styles.title,
                       fontSize: isMobile ? '18px' : '20px',
+                      color: darkMode ? '#ffffff' : '#222222', 
+                      marginBottom: '12px'
                     }}>
                       <a 
                         href="https://github.com/bernardh77/TeamCheckr" 
                         target="_blank" 
                         rel="noopener noreferrer" 
-                        style={{
-                          color: '#222222', 
-                          textDecoration: 'none'
-                        }}
                         onMouseEnter={(e) => e.currentTarget.style.textDecoration = 'underline'}
                         onMouseLeave={(e) => e.currentTarget.style.textDecoration = 'none'}
                       >
@@ -515,8 +578,8 @@ export default function Home() {
                     
                     <div style={{
                       fontSize: '16px',
-                      color: '#555555',
-                      marginBottom: '16px'
+                      color: darkMode ? '#e2e8f0' : '#555555',
+                      marginBottom: '24px'
                     }}>
                       Ongoing project building on ideas explored during UniHack 2024, aimed at helping university students form project groups and leave anonymous peer feedback.
                     </div>
@@ -556,7 +619,7 @@ export default function Home() {
                 <div style={{
                   display: 'flex',
                   alignItems: 'flex-start',
-                  gap: isMobile ? '12px' : '16px'
+                  gap: isMobile ? '16px' : '20px'
                 }}>
                   {/* Project Logo/Image */}
                   <div style={{
@@ -582,7 +645,7 @@ export default function Home() {
                     <div style={{
                       fontSize: '14px',
                       color: '#777777',
-                      marginBottom: '4px'
+                      marginBottom: '8px'
                     }}>
                       Sept 2024 - Dec 2024 | Sydney
                     </div>
@@ -596,8 +659,8 @@ export default function Home() {
                     
                     <div style={{
                       fontSize: '16px',
-                      color: '#555555',
-                      marginBottom: '16px'
+                      color: darkMode ? '#e2e8f0' : '#555555',
+                      marginBottom: '24px'
                     }}>
                       AI-Powered platform designed to help users discover a wide range of events and explore sessions hosted by their peers or organizations.
                     </div>
@@ -633,7 +696,7 @@ export default function Home() {
                 <div style={{
                   display: 'flex',
                   alignItems: 'flex-start',
-                  gap: isMobile ? '12px' : '16px'
+                  gap: isMobile ? '16px' : '20px'
                 }}>
                   {/* Project Logo/Image */}
                   <div style={{
@@ -659,7 +722,7 @@ export default function Home() {
                     <div style={{
                       fontSize: '14px',
                       color: '#777777',
-                      marginBottom: '4px'
+                      marginBottom: '8px'
                     }}>
                       March 2024 | Sydney
                     </div>
@@ -667,15 +730,12 @@ export default function Home() {
                     <h3 style={{
                       ...styles.title,
                       fontSize: isMobile ? '18px' : '20px',
+                      color: darkMode ? '#e2e8f0' : '#222222'
                     }}>
                       <a 
                         href="https://github.com/bernardh77/GroupedIn" 
                         target="_blank" 
                         rel="noopener noreferrer" 
-                        style={{
-                          color: '#222222', 
-                          textDecoration: 'none'
-                        }}
                         onMouseEnter={(e) => e.currentTarget.style.textDecoration = 'underline'}
                         onMouseLeave={(e) => e.currentTarget.style.textDecoration = 'none'}
                       >
@@ -685,8 +745,8 @@ export default function Home() {
                     
                     <div style={{
                       fontSize: '16px',
-                      color: '#555555',
-                      marginBottom: '16px'
+                      color: darkMode ? '#e2e8f0' : '#555555',
+                      marginBottom: '24px'
                     }}>
                       A team-matching platform created as part of UniHack 2024, aimed at helping students find project teammates and share anonymous peer feedback.
                     </div>
@@ -722,7 +782,7 @@ export default function Home() {
                 <div style={{
                   display: 'flex',
                   alignItems: 'flex-start',
-                  gap: isMobile ? '12px' : '16px'
+                  gap: isMobile ? '16px' : '20px'
                 }}>
                   {/* Project Logo/Image */}
                   <div style={{
@@ -748,7 +808,7 @@ export default function Home() {
                     <div style={{
                       fontSize: '14px',
                       color: '#777777',
-                      marginBottom: '4px'
+                      marginBottom: '8px'
                     }}>
                       Oct 2023 - Nov 2023 | Sydney
                     </div>
@@ -756,15 +816,12 @@ export default function Home() {
                     <h3 style={{
                       ...styles.title,
                       fontSize: isMobile ? '18px' : '20px',
+                      color: darkMode ? '#ffffff' : '#222222', 
                     }}>
                       <a 
                         href="https://github.com/bernardh77/airbrb" 
                         target="_blank" 
                         rel="noopener noreferrer" 
-                        style={{
-                          color: '#222222', 
-                          textDecoration: 'none'
-                        }}
                         onMouseEnter={(e) => e.currentTarget.style.textDecoration = 'underline'}
                         onMouseLeave={(e) => e.currentTarget.style.textDecoration = 'none'}
                       >
@@ -774,8 +831,8 @@ export default function Home() {
                     
                     <div style={{
                       fontSize: '16px',
-                      color: '#555555',
-                      marginBottom: '16px'
+                      color: darkMode ? '#e2e8f0' : '#555555',
+                      marginBottom: '24px'
                     }}>
                       A frontend clone of Airbnb developed as part of a university web development course, focused on building a full-featured, production-ready UI using modern React practices.
                     </div>
