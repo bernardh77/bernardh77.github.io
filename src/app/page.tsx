@@ -16,9 +16,10 @@ export default function Home() {
   // Add state for screen size
   const [isMobile, setIsMobile] = useState(false);
   
-  // Add state for dark mode
+  // Add states for dark mode
   const [darkMode, setDarkMode] = useState(false);
-
+  const [isLoading, setIsLoading] = useState(true);
+  
   // Effect to detect screen size
   useEffect(() => {
     const checkIsMobile = () => {
@@ -46,12 +47,16 @@ export default function Home() {
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
       setDarkMode(prefersDark);
     }
+    // Mark loading as complete after dark mode is determined
+    setIsLoading(false);
   }, []);
   
   // Update when dark mode changes
   useEffect(() => {
-    localStorage.setItem('darkMode', darkMode.toString());
-  }, [darkMode]);
+    if (!isLoading) {
+      localStorage.setItem('darkMode', darkMode.toString());
+    }
+  }, [darkMode, isLoading]);
   
   // Toggle dark mode
   const toggleDarkMode = () => {
@@ -221,6 +226,11 @@ export default function Home() {
       transition: 'color 0.3s ease, background-color 0.3s ease',
     }
   };
+  
+  // Don't render until we've determined the correct mode
+  if (isLoading) {
+    return null;
+  }
   
   return (
     <main style={{ 
