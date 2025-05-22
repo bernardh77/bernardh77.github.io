@@ -47,6 +47,19 @@ export default function Home() {
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
       setDarkMode(prefersDark);
     }
+    
+    // Preload both profile images to prevent lag when switching
+    const preloadImages = () => {
+      // Using the browser's Image constructor for preloading
+      const lightImage = new window.Image();
+      lightImage.src = profilePictureDay.src;
+      
+      const darkImage = new window.Image();
+      darkImage.src = profilePictureNight.src;
+    };
+    
+    preloadImages();
+    
     // Mark loading as complete after dark mode is determined
     setIsLoading(false);
   }, []);
@@ -316,18 +329,39 @@ export default function Home() {
           
           {/* Right content (profile image) */}
           <div style={styles.heroImageContainer}>
+            {/* Preload both images but only display one based on dark mode */}
             <Image 
-              src={darkMode ? profilePictureNight : profilePictureDay}
-              alt="profile picture"
+              src={profilePictureDay}
+              alt="profile picture - light mode"
               fill
+              priority
               style={{ 
                 objectFit: 'cover',
                 objectPosition: 'center',
                 width: '100%',
                 height: '100%',
                 borderRadius: '8px',
+                opacity: darkMode ? 0 : 1,
+                transition: 'opacity 0.3s ease',
               }}
+            />
+            <Image 
+              src={profilePictureNight}
+              alt="profile picture - dark mode"
+              fill
               priority
+              style={{ 
+                objectFit: 'cover',
+                objectPosition: 'center',
+                width: '100%',
+                height: '100%',
+                borderRadius: '8px',
+                opacity: darkMode ? 1 : 0,
+                transition: 'opacity 0.3s ease',
+                position: 'absolute',
+                top: 0,
+                left: 0,
+              }}
             />
           </div>
         </section>
@@ -385,7 +419,8 @@ export default function Home() {
                       src={cititrailsImage} 
                       alt="CitiTrails" 
                       width={isMobile ? 40 : 48} 
-                      height={isMobile ? 40 : 48} 
+                      height={isMobile ? 40 : 48}
+                      loading="lazy"
                     />
                   </div>
                   
@@ -481,6 +516,7 @@ export default function Home() {
                       alt="UNSW" 
                       width={48} 
                       height={48}
+                      loading="lazy"
                       style={{
                         objectFit: 'cover',
                         width: '100%',

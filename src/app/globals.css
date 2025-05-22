@@ -11,8 +11,8 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -50,4 +50,21 @@ html.dark-mode {
 html.dark-mode body {
   background-color: #0f172a;
   color: #ffffff;
+}
+
+/* Image optimization */
+img {
+  backface-visibility: hidden; /* Optimizes image rendering */
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0); /* Force GPU acceleration */
+  -webkit-transform: translateZ(0);
+}
+
+/* Preload profile images */
+.img-preload {
+  position: absolute;
+  width: 0;
+  height: 0;
+  visibility: hidden;
+  opacity: 0;
 }
