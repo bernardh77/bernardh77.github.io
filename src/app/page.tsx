@@ -486,7 +486,7 @@ export default function Home() {
                       </li>
                       <li style={{...styles.listItem, marginBottom: 0}}>
                         <span style={styles.listItemDot}></span>
-                        Tech Stack: Django, JavaScript, Tailwind CSS, Python, Mapbox, Dicebear API
+                        Tech Stack: Next.js, Django, JavaScript, Tailwind CSS, Python, Mapbox, Dicebear API
                       </li>
                     </ul>
                   </div>
