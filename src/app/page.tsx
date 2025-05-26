@@ -474,7 +474,7 @@ export default function Home() {
                       </li>
                       <li style={styles.listItem}>
                         <span style={styles.listItemDot}></span>
-                        Integrated Mapbox for interactive trail mapping and Decklear API for avatar generation.
+                        Integrated Mapbox for interactive trail mapping and Dicebear API for avatar generation.
                       </li>
                       <li style={styles.listItem}>
                         <span style={styles.listItemDot}></span>
