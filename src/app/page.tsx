@@ -2,6 +2,11 @@
 
 import Image from 'next/image';
 import { FaLinkedin, FaGithub, FaEnvelope, FaFileAlt, FaMoon, FaSun } from 'react-icons/fa';
+import {
+  SiReact, SiNextdotjs, SiTypescript, SiTailwindcss,
+  SiDjango, SiExpress, SiPostgresql, SiMongodb,
+  SiGit, SiHeroku
+} from 'react-icons/si';
 import { useState, useEffect } from 'react';
 
 // Import the profile image
@@ -276,7 +281,7 @@ export default function Home() {
             </h1>
             
             <p style={styles.paragraph}>
-              Software developer
+              Frontend Software Developer | Sydney, Australia
             </p>
             
             <p style={{...styles.paragraph, marginBottom: '40px', maxWidth: '500px'}}>
@@ -366,9 +371,73 @@ export default function Home() {
           </div>
         </section>
         
+        {/* Tech Stack Section */}
+        <section style={{
+          width: '100%',
+          margin: isMobile ? '8px 0 12px 0' : '16px 0 20px 0',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          background: darkMode ? 'rgba(255,255,255,0.04)' : 'rgba(0,0,0,0.03)',
+          borderRadius: '18px',
+          boxShadow: darkMode
+            ? '0 2px 16px 0 rgba(0,0,0,0.18)'
+            : '0 2px 12px 0 rgba(0,0,0,0.08)',
+          padding: isMobile ? '16px 8px' : '24px 0',
+          maxWidth: 900,
+          marginLeft: 'auto',
+          marginRight: 'auto',
+        }}>
+          <h2 style={{
+            fontSize: isMobile ? '1.2rem' : '1.5rem',
+            fontWeight: 700,
+            marginBottom: isMobile ? 16 : 20,
+            color: darkMode ? '#e5e7eb' : '#222',
+            letterSpacing: 1,
+            textAlign: 'center',
+          }}>
+            Tech Stack
+          </h2>
+          <div style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+            gap: isMobile ? '18px 24px' : '28px 40px',
+            maxWidth: 600,
+          }}>
+            {[{
+              icon: <SiReact title="React" size={32} />, label: 'React'
+            }, {
+              icon: <SiNextdotjs title="Next.js" size={32} />, label: 'Next.js'
+            }, {
+              icon: <SiTypescript title="TypeScript" size={32} />, label: 'TypeScript'
+            }, {
+              icon: <SiTailwindcss title="Tailwind CSS" size={32} />, label: 'Tailwind'
+            }, {
+              icon: <SiDjango title="Django" size={32} />, label: 'Django'
+            }, {
+              icon: <SiExpress title="Express.js" size={32} />, label: 'Express'
+            }, {
+              icon: <SiPostgresql title="PostgreSQL" size={32} />, label: 'PostgreSQL'
+            }, {
+              icon: <SiMongodb title="MongoDB" size={32} />, label: 'MongoDB'
+            }, {
+              icon: <SiGit title="Git" size={32} />, label: 'Git'
+            }, {
+              icon: <SiHeroku title="Heroku" size={32} />, label: 'Heroku'
+            }].map(({ icon, label }) => (
+              <div key={label} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', minWidth: 56 }}>
+                {icon}
+                <span style={{ fontSize: '13px', marginTop: 4, color: darkMode ? '#e5e7eb' : '#222', textAlign: 'center' }}>{label}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+        
         {/* Work/Education/Projects Tabs */}
         <section style={{
-          marginTop: '24px',
+          // marginTop: '24px',
           marginBottom: '64px'
         }}>
           {/* Tab Buttons */}
