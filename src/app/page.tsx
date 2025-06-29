@@ -5,7 +5,7 @@ import { FaLinkedin, FaGithub, FaEnvelope, FaFileAlt, FaMoon, FaSun } from 'reac
 import {
   SiReact, SiNextdotjs, SiTypescript, SiTailwindcss,
   SiDjango, SiExpress, SiPostgresql, SiMongodb,
-  SiGit, SiHeroku
+  SiGit, SiHeroku, SiVercel
 } from 'react-icons/si';
 import { useState, useEffect } from 'react';
 
@@ -263,7 +263,14 @@ export default function Home() {
         {/* Dark Mode Toggle */}
         <button 
           onClick={toggleDarkMode} 
-          style={styles.darkModeToggle}
+          style={{
+            ...styles.darkModeToggle,
+            backgroundColor: darkMode ? '#000' : '#fff',
+            borderTopLeftRadius: '0',
+            borderBottomLeftRadius: '6px',
+            borderTopRightRadius: '0',
+            borderBottomRightRadius: '0'
+          }}
           aria-label={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
         >
           {darkMode ? <FaSun size={20} /> : <FaMoon size={20} />}
@@ -281,7 +288,7 @@ export default function Home() {
             </h1>
             
             <p style={styles.paragraph}>
-              Frontend Developer | Sydney, Australia
+              Full Stack Developer | Sydney, Australia
             </p>
             
             <p style={{...styles.paragraph, marginBottom: '40px', maxWidth: '500px'}}>
@@ -296,7 +303,7 @@ export default function Home() {
               flexWrap: isMobile ? 'wrap' : 'nowrap',
             }}>
               <a 
-                href="/Bernard_Haryanto_Resume_2025.docx" 
+                href="/Bernard_Haryanto_Resume_2025.pdf" 
                 target="_blank"
                 rel="noopener noreferrer"
                 style={styles.primaryButton}
@@ -426,6 +433,25 @@ export default function Home() {
               icon: <SiGit title="Git" size={32} />, label: 'Git'
             }, {
               icon: <SiHeroku title="Heroku" size={32} />, label: 'Heroku'
+            }, {
+              icon: <SiVercel title="Vercel" size={32} />, label: 'Vercel'
+            }, {
+              icon: (
+                <div style={{
+                  width: '32px',
+                  height: '32px',
+                  backgroundColor: darkMode ? '#fff' : '#000',
+                  borderRadius: '4px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: darkMode ? '#000' : '#fff',
+                  fontSize: '16px',
+                  fontWeight: 'bold'
+                }}>
+                  N
+                </div>
+              ), label: 'Neon'
             }].map(({ icon, label }) => (
               <div key={label} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', minWidth: 56 }}>
                 {icon}
@@ -477,12 +503,8 @@ export default function Home() {
             }}>
               {/* CitiTrails */}
               <div style={styles.card}>
-                <div style={{
-                  display: 'flex',
-                  alignItems: 'flex-start',
-                  gap: isMobile ? '16px' : '20px'
-                }}>
-                  {/* Company Logo */}
+                {/* Company Logo */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: isMobile ? '12px' : '16px', marginBottom: isMobile ? '10px' : '14px' }}>
                   <div style={styles.logoContainer}>
                     <Image 
                       src={cititrailsImage} 
@@ -490,75 +512,50 @@ export default function Home() {
                       width={isMobile ? 40 : 48} 
                       height={isMobile ? 40 : 48}
                       loading="lazy"
+                      style={{ objectFit: 'cover', width: '100%', height: '100%' }}
                     />
                   </div>
-                  
-                  {/* Job Details */}
-                  <div style={{ flex: 1 }}>
-                    <div style={{
-                      fontSize: isMobile ? '12px' : '14px',
-                      color: darkMode ? '#a3b1cc' : '#777777',
-                      marginBottom: '8px'
-                    }}>
-                      Feb 2025 - Present | Sydney
-                    </div>
-                    
-                    <h3 style={{
-                      ...styles.title,
-                      fontSize: isMobile ? '18px' : '20px',
-                      marginBottom: '12px'
-                    }}>
-                      <a 
-                        href="https://cititrails.com" 
-                        target="_blank" 
-                        rel="noopener noreferrer" 
-                        style={{
-                          color: darkMode ? '#ffffff' : '#222222', 
-                          textDecoration: 'none',
-                          fontWeight: '600'
-                        }}
-                        onMouseEnter={(e) => e.currentTarget.style.textDecoration = 'underline'}
-                        onMouseLeave={(e) => e.currentTarget.style.textDecoration = 'none'}
-                      >
-                        CitiTrails
-                      </a>
-                    </h3>
-                    
-                    <div style={{
-                      fontSize: isMobile ? '14px' : '16px',
-                      color: darkMode ? '#e2e8f0' : '#555555',
-                      marginBottom: '24px'
-                    }}>
-                      Software Developer Intern
-                    </div>
-                    
-                    <ul style={styles.list}>
-                      <li style={styles.listItem}>
-                        <span style={styles.listItemDot}></span>
-                        Developed key frontend features including the Favourite Trails page, Profile page, and Gallery of Locals.
-                      </li>
-                      <li style={styles.listItem}>
-                        <span style={styles.listItemDot}></span>
-                        Enhanced the trail editing experience by implementing POI reordering and refining the UI for better usability and user experience (UX).
-                      </li>
-                      <li style={styles.listItem}>
-                        <span style={styles.listItemDot}></span>
-                        Integrated Mapbox for interactive trail mapping and Dicebear API for avatar generation.
-                      </li>
-                      <li style={styles.listItem}>
-                        <span style={styles.listItemDot}></span>
-                        Collaborated with the Founder and CTO, aligning development with user needs and product vision.
-                      </li>
-                      <li style={styles.listItem}>
-                        <span style={styles.listItemDot}></span>
-                        Practical Agile development using Git, Jira, Confluence, documenting feedback and iterating quickly.
-                      </li>
-                      <li style={{...styles.listItem, marginBottom: 0}}>
-                        <span style={styles.listItemDot}></span>
-                        Tech Stack: Next.js, Heroku, Django, JavaScript, Tailwind CSS, Python, Mapbox, Dicebear API
-                      </li>
-                    </ul>
+                  <div style={{ fontWeight: 700, fontSize: isMobile ? '16px' : '18px', color: darkMode ? '#fff' : '#222' }}>
+                    CitiTrails
                   </div>
+                </div>
+                {/* Company Description */}
+                <div style={{ marginBottom: '18px', marginTop: 0 }}>
+                  <div style={{ fontSize: isMobile ? '13px' : '15px', color: darkMode ? '#a3b1cc' : '#555', marginTop: 2 }}>
+                    CitiTrails is an online platform that helps users discover unique walking trails and hidden gems in Sydney, curated by local experts. It offers personalized itineraries and fosters a community where explorers can connect and share their experiences.
+                  </div>
+                </div>
+                {/* Software Developer (Part Time) */}
+                <div style={{ marginBottom: '24px' }}>
+                  <div style={{ fontWeight: 600, fontSize: isMobile ? '15px' : '17px', color: darkMode ? '#fff' : '#222' }}>
+                    Software Developer (Part Time)
+                    <span style={{ fontWeight: 400, fontSize: isMobile ? '12px' : '14px', color: darkMode ? '#a3b1cc' : '#777', marginLeft: 8 }}>
+                      June 2025 – Aug 2025 | Sydney
+                    </span>
+                  </div>
+                  <ul style={styles.list}>
+                    <li style={styles.listItem}><span style={styles.listItemDot}></span>Led a complete rebuild of the platform, transitioning to a modern, serverless architecture using Next.js, Neon, and Vercel to enhance performance, scalability, and developer experience.</li>
+                    <li style={styles.listItem}><span style={styles.listItemDot}></span>Manage and mentor a team of two software development interns, overseeing task allocation, code reviews, and technical direction.</li>
+                    <li style={styles.listItem}><span style={styles.listItemDot}></span>Work directly with the Founder to align the product rebuild with long-term business goals and user needs.</li>
+                    <li style={styles.listItem}><span style={styles.listItemDot}></span>Tech Stack: Next.js, Neon, Vercel</li>
+                  </ul>
+                </div>
+                {/* Software Development Intern */}
+                <div>
+                  <div style={{ fontWeight: 600, fontSize: isMobile ? '15px' : '17px', color: darkMode ? '#fff' : '#222' }}>
+                    Software Development Intern
+                    <span style={{ fontWeight: 400, fontSize: isMobile ? '12px' : '14px', color: darkMode ? '#a3b1cc' : '#777', marginLeft: 8 }}>
+                      Feb 2025 – June 2025 | Sydney
+                    </span>
+                  </div>
+                  <ul style={styles.list}>
+                    <li style={styles.listItem}><span style={styles.listItemDot}></span>Developed key frontend features including the Favourite Trails page, Profile page, and Gallery of Locals.</li>
+                    <li style={styles.listItem}><span style={styles.listItemDot}></span>Enhanced the trail editing experience by implementing POI reordering and refining the UI for better usability and user experience (UX).</li>
+                    <li style={styles.listItem}><span style={styles.listItemDot}></span>Integrated Mapbox for interactive trail mapping and Dicebear API for avatar generation.</li>
+                    <li style={styles.listItem}><span style={styles.listItemDot}></span>Collaborated with the Founder and CTO, aligning development with user needs and product vision.</li>
+                    <li style={styles.listItem}><span style={styles.listItemDot}></span>Practiced Agile development using Git, Jira, Confluence, documenting feedback and iterating quickly.</li>
+                    <li style={styles.listItem}><span style={styles.listItemDot}></span>Tech Stack: Heroku, Django, JavaScript, Tailwind CSS, Python, HTML, CSS, Mapbox, Dicebear API</li>
+                  </ul>
                 </div>
               </div>
             </div>
