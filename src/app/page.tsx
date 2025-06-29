@@ -288,7 +288,7 @@ export default function Home() {
             </h1>
             
             <p style={styles.paragraph}>
-              Full Stack Developer | Sydney, Australia
+              Software Developer | Sydney, Australia
             </p>
             
             <p style={{...styles.paragraph, marginBottom: '40px', maxWidth: '500px'}}>
