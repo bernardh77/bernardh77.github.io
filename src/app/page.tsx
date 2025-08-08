@@ -432,7 +432,7 @@ export default function Home() {
             }, {
               icon: <SiGit title="Git" size={32} />, label: 'Git'
             }, {
-              icon: <SiHeroku title="Heroku" size={32} />, label: 'Heroku'
+              icon: <SiReact title="React Native" size={32} />, label: 'React Native'
             }, {
               icon: <SiVercel title="Vercel" size={32} />, label: 'Vercel'
             }, {
@@ -516,7 +516,7 @@ export default function Home() {
                     />
                   </div>
                   <div style={{ fontWeight: 700, fontSize: isMobile ? '16px' : '18px', color: darkMode ? '#fff' : '#222' }}>
-                    CitiTrails
+                    <a href="https://citixp.com" target="_blank" rel="noopener noreferrer">CitiTrails</a>
                   </div>
                 </div>
                 {/* Company Description */}
@@ -537,7 +537,8 @@ export default function Home() {
                     <li style={styles.listItem}><span style={styles.listItemDot}></span>Led a complete rebuild of the platform, transitioning to a modern, serverless architecture using Next.js, Neon, and Vercel to enhance performance, scalability, and developer experience.</li>
                     <li style={styles.listItem}><span style={styles.listItemDot}></span>Manage and mentor a team of two software development interns, overseeing task allocation, code reviews, and technical direction.</li>
                     <li style={styles.listItem}><span style={styles.listItemDot}></span>Work directly with the Founder to align the product rebuild with long-term business goals and user needs.</li>
-                    <li style={styles.listItem}><span style={styles.listItemDot}></span>Tech Stack: Next.js, Neon, Vercel</li>
+                    <li style={styles.listItem}><span style={styles.listItemDot}></span>Designed and developed iOS application using React Native (currently under review by Apple for App Store release).</li>
+                    <li style={styles.listItem}><span style={styles.listItemDot}></span>Tech Stack: Next,js, React Native, Node.js, Neon, Vercel</li>
                   </ul>
                 </div>
                 {/* Software Development Intern */}
@@ -619,7 +620,7 @@ export default function Home() {
                     <ul style={styles.list}>
                       <li style={{...styles.listItem, marginBottom: 0}}>
                         <span style={styles.listItemDot}></span>
-                        WAM of 79.84 - Distinction
+                        WAM of 79.64 - Distinction
                       </li>
                     </ul>
                   </div>
@@ -668,7 +669,7 @@ export default function Home() {
                       color: '#777777',
                       marginBottom: '8px'
                     }}>
-                      April 2025 - Present | Sydney
+                      April 2025 - May 2025 | Sydney
                     </div>
                     
                     <h3 style={{
