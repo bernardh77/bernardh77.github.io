@@ -530,7 +530,7 @@ export default function Home() {
                   <div style={{ fontWeight: 600, fontSize: isMobile ? '15px' : '17px', color: darkMode ? '#fff' : '#222' }}>
                     Software Developer (Part Time)
                     <span style={{ fontWeight: 400, fontSize: isMobile ? '12px' : '14px', color: darkMode ? '#a3b1cc' : '#777', marginLeft: 8 }}>
-                      June 2025 – Aug 2025 | Sydney
+                      June 2025 – Present | Sydney
                     </span>
                   </div>
                   <ul style={styles.list}>
