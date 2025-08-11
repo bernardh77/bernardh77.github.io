@@ -537,7 +537,7 @@ export default function Home() {
                     <li style={styles.listItem}><span style={styles.listItemDot}></span>Led a complete rebuild of the platform, transitioning to a modern, serverless architecture using Next.js, Neon, and Vercel to enhance performance, scalability, and developer experience.</li>
                     <li style={styles.listItem}><span style={styles.listItemDot}></span>Manage and mentor a team of two software development interns, overseeing task allocation, code reviews, and technical direction.</li>
                     <li style={styles.listItem}><span style={styles.listItemDot}></span>Work directly with the Founder to align the product rebuild with long-term business goals and user needs.</li>
-                    <li style={styles.listItem}><span style={styles.listItemDot}></span>Designed and developed iOS application using React Native (currently under review by Apple for App Store release).</li>
+                    <li style={styles.listItem}><span style={styles.listItemDot}></span>Designed and developed iOS application using React Native (CitiXP on App Store).</li>
                     <li style={styles.listItem}><span style={styles.listItemDot}></span>Tech Stack: Next,js, React Native, Node.js, Neon, Vercel</li>
                   </ul>
                 </div>
