@@ -516,13 +516,13 @@ export default function Home() {
                     />
                   </div>
                   <div style={{ fontWeight: 700, fontSize: isMobile ? '16px' : '18px', color: darkMode ? '#fff' : '#222' }}>
-                    <a href="https://citixp.com" target="_blank" rel="noopener noreferrer">CitiTrails</a>
+                    <a href="https://citixp.com" target="_blank" rel="noopener noreferrer">CitiXP</a>
                   </div>
                 </div>
                 {/* Company Description */}
                 <div style={{ marginBottom: '18px', marginTop: 0 }}>
                   <div style={{ fontSize: isMobile ? '13px' : '15px', color: darkMode ? '#a3b1cc' : '#555', marginTop: 2 }}>
-                    CitiTrails is an online platform that helps users discover unique walking trails and hidden gems in Sydney, curated by local experts. It offers personalized itineraries and fosters a community where explorers can connect and share their experiences.
+                    CitiXP (formerly CitiTrails) is a travel platform that began with curated local walking trails in Sydney and later broadened to include community-driven itineraries for global destinations.
                   </div>
                 </div>
                 {/* Software Developer (Part Time) */}
@@ -534,10 +534,10 @@ export default function Home() {
                     </span>
                   </div>
                   <ul style={styles.list}>
-                    <li style={styles.listItem}><span style={styles.listItemDot}></span>Led a complete rebuild of the platform, transitioning to a modern, serverless architecture using Next.js, Neon, and Vercel to enhance performance, scalability, and developer experience.</li>
-                    <li style={styles.listItem}><span style={styles.listItemDot}></span>Manage and mentor a team of two software development interns, overseeing task allocation, code reviews, and technical direction.</li>
-                    <li style={styles.listItem}><span style={styles.listItemDot}></span>Work directly with the Founder to align the product rebuild with long-term business goals and user needs.</li>
-                    <li style={styles.listItem}><span style={styles.listItemDot}></span>Designed and developed iOS application using React Native (CitiXP on App Store).</li>
+                    <li style={styles.listItem}><span style={styles.listItemDot}></span>Led the redevelopment of the <a href="https://citixp.com" style={{ color: darkMode ? '#fff' : '#222', textDecoration: 'underline' }}>CitiXP</a> web platform, moving to a serverless architecture with Next.js, Neon, and Vercel to improve scalability and developer experience.</li>
+                    <li style={styles.listItem}><span style={styles.listItemDot}></span>Designed and developed iOS application using React Native (<a href="https://apps.apple.com/au/app/citixp/id6749657518" style={{ color: darkMode ? '#fff' : '#222', textDecoration: 'underline' }}>CitiXP</a> on App Store).</li>
+                    <li style={styles.listItem}><span style={styles.listItemDot}></span>Mentored and supported 2 software development interns through task allocation, code reviews, and pair programming.</li>
+                    <li style={styles.listItem}><span style={styles.listItemDot}></span>Collaborated directly with the Founder to align technical decisions with long-term product and business goals.</li>
                     <li style={styles.listItem}><span style={styles.listItemDot}></span>Tech Stack: Next,js, React Native, Node.js, Neon, Vercel</li>
                   </ul>
                 </div>
