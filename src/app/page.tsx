@@ -292,7 +292,7 @@ export default function Home() {
             </p>
             
             <p style={{...styles.paragraph, marginBottom: '40px', maxWidth: '500px'}}>
-              Final-year CS student at UNSW 
+              Computer Science graduate from UNSW
             </p>
             
             {/* Buttons/Links */}
@@ -599,7 +599,7 @@ export default function Home() {
                       color: darkMode ? '#a3b1cc' : '#777777',
                       marginBottom: '8px'
                     }}>
-                      2022 - Present | Sydney
+                      Sept 2022 - Aug 2025 | Sydney
                     </div>
                     
                     <h3 style={{
@@ -620,7 +620,7 @@ export default function Home() {
                     <ul style={styles.list}>
                       <li style={{...styles.listItem, marginBottom: 0}}>
                         <span style={styles.listItemDot}></span>
-                        WAM of 79.64 - Distinction
+                        WAM of 79.125 - Distinction
                       </li>
                     </ul>
                   </div>
