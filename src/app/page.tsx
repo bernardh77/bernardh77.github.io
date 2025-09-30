@@ -25,6 +25,9 @@ export default function Home() {
   const [darkMode, setDarkMode] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   
+  // Add state for PDF viewer
+  const [showPdfViewer, setShowPdfViewer] = useState(false);
+  
   // Effect to detect screen size
   useEffect(() => {
     const checkIsMobile = () => {
@@ -312,6 +315,19 @@ export default function Home() {
                 Resume
               </a>
               
+              {/* <button
+                onClick={() => setShowPdfViewer(!showPdfViewer)}
+                style={{
+                  ...styles.primaryButton,
+                  backgroundColor: showPdfViewer ? '#dc2626' : '#059669',
+                  border: 'none',
+                  cursor: 'pointer'
+                }}
+              >
+                <FaFileAlt />
+                {showPdfViewer ? 'Hide PDF' : 'View PDF'}
+              </button> */}
+              
               <a 
                 href="https://linkedin.com/in/bernard-haryanto-0ba847272" 
                 target="_blank"
@@ -377,6 +393,57 @@ export default function Home() {
             />
           </div>
         </section>
+        
+        {/* PDF Viewer Section */}
+        {showPdfViewer && (
+          <section style={{
+            width: '100%',
+            margin: isMobile ? '8px 0 12px 0' : '16px 0 20px 0',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            background: darkMode ? 'rgba(255,255,255,0.04)' : 'rgba(0,0,0,0.03)',
+            borderRadius: '18px',
+            boxShadow: darkMode
+              ? '0 2px 16px 0 rgba(0,0,0,0.18)'
+              : '0 2px 12px 0 rgba(0,0,0,0.08)',
+            padding: isMobile ? '16px 8px' : '24px 0',
+            maxWidth: 900,
+            marginLeft: 'auto',
+            marginRight: 'auto',
+          }}>
+            <h2 style={{
+              fontSize: isMobile ? '1.2rem' : '1.5rem',
+              fontWeight: 700,
+              marginBottom: isMobile ? 16 : 20,
+              color: darkMode ? '#e5e7eb' : '#222',
+              letterSpacing: 1,
+              textAlign: 'center',
+            }}>
+              Resume
+            </h2>
+            <div style={{
+              width: '100%',
+              height: isMobile ? '500px' : '700px',
+              borderRadius: '8px',
+              overflow: 'hidden',
+              border: `1px solid ${darkMode ? '#334155' : '#e1e1e1'}`,
+              boxShadow: `0 4px 12px ${darkMode ? 'rgba(0,0,0,0.3)' : 'rgba(0,0,0,0.1)'}`
+            }}>
+              <iframe
+                src="/Bernard_Haryanto_Resume_2025.pdf#toolbar=1&navpanes=1&scrollbar=1"
+                width="100%"
+                height="100%"
+                style={{
+                  border: 'none',
+                  borderRadius: '8px'
+                }}
+                title="Bernard Haryanto Resume"
+              />
+            </div>
+          </section>
+        )}
         
         {/* Tech Stack Section */}
         <section style={{
@@ -530,7 +597,7 @@ export default function Home() {
                   <div style={{ fontWeight: 600, fontSize: isMobile ? '15px' : '17px', color: darkMode ? '#fff' : '#222' }}>
                     Software Developer (Part Time)
                     <span style={{ fontWeight: 400, fontSize: isMobile ? '12px' : '14px', color: darkMode ? '#a3b1cc' : '#777', marginLeft: 8 }}>
-                      June 2025 – Present | Sydney
+                      Feb 2025 – Present | Sydney
                     </span>
                   </div>
                   <ul style={styles.list}>
@@ -542,7 +609,7 @@ export default function Home() {
                   </ul>
                 </div>
                 {/* Software Development Intern */}
-                <div>
+                {/* <div>
                   <div style={{ fontWeight: 600, fontSize: isMobile ? '15px' : '17px', color: darkMode ? '#fff' : '#222' }}>
                     Software Development Intern
                     <span style={{ fontWeight: 400, fontSize: isMobile ? '12px' : '14px', color: darkMode ? '#a3b1cc' : '#777', marginLeft: 8 }}>
@@ -557,7 +624,7 @@ export default function Home() {
                     <li style={styles.listItem}><span style={styles.listItemDot}></span>Practiced Agile development using Git, Jira, Confluence, documenting feedback and iterating quickly.</li>
                     <li style={styles.listItem}><span style={styles.listItemDot}></span>Tech Stack: Heroku, Django, JavaScript, Tailwind CSS, Python, HTML, CSS, Mapbox, Dicebear API</li>
                   </ul>
-                </div>
+                </div> */}
               </div>
             </div>
           )}
@@ -620,7 +687,7 @@ export default function Home() {
                     <ul style={styles.list}>
                       <li style={{...styles.listItem, marginBottom: 0}}>
                         <span style={styles.listItemDot}></span>
-                        WAM of 79.125 - Distinction
+                        WAM: Distinction
                       </li>
                     </ul>
                   </div>
