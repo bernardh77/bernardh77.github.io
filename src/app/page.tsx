@@ -774,7 +774,7 @@ export default function Home() {
                     </li>
                     <li style={styles.listItem}>
                       <span style={styles.listItemDot}></span>Designed and
-                      developed iOS application using React Native (
+                      developed a React Native mobile app for{" "}
                       <a
                         href="https://apps.apple.com/au/app/citixp/id6749657518"
                         style={{
@@ -782,9 +782,19 @@ export default function Home() {
                           textDecoration: "underline",
                         }}
                       >
-                        CitiXP
+                        iOS
                       </a>{" "}
-                      on App Store).
+                      and{" "}
+                      <a
+                        href="https://play.google.com/store/apps/details?id=com.citixp.mobile&pcampaignid=web_share"
+                        style={{
+                          color: darkMode ? "#fff" : "#222",
+                          textDecoration: "underline",
+                        }}
+                      >
+                        Android
+                      </a>
+                      .
                     </li>
                     <li style={styles.listItem}>
                       <span style={styles.listItemDot}></span>Mentored and
