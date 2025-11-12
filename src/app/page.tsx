@@ -1002,10 +1002,9 @@ export default function Home() {
                     <ul style={styles.list}>
                       <li style={styles.listItem}>
                         <span style={styles.listItemDot}></span>
-                        Built core apps including a Spotify-style music player
-                        UI, PDF viewer with custom rendering (pdfjs-dist), and
-                        image viewer inside a unified desktop shell with window
-                        management.
+                        Built core apps including a PDF viewer with custom
+                        rendering (pdfjs-dist) and image viewer inside a unified
+                        desktop shell with window management.
                       </li>
                       <li style={styles.listItem}>
                         <span style={styles.listItemDot}></span>
