@@ -919,6 +919,118 @@ export default function Home() {
                 gap: "24px",
               }}
             >
+              {/* macOS Desktop Clone */}
+              <div style={styles.card}>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "flex-start",
+                    gap: isMobile ? "16px" : "20px",
+                  }}
+                >
+                  {/* Project Logo/Image */}
+                  <div
+                    style={{
+                      width: "48px",
+                      height: "48px",
+                      borderRadius: "4px",
+                      backgroundColor: "#9333ea",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      overflow: "hidden",
+                      padding: "0",
+                      boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
+                      color: "white",
+                      fontSize: "18px",
+                      fontWeight: "600",
+                    }}
+                  >
+                    MD
+                  </div>
+
+                  {/* Project Details */}
+                  <div style={{ flex: 1 }}>
+                    <div
+                      style={{
+                        fontSize: "14px",
+                        color: darkMode ? "#a3b1cc" : "#777777",
+                        marginBottom: "8px",
+                      }}
+                    >
+                      Nov 2025 – Present | Sydney
+                    </div>
+
+                    <h3
+                      style={{
+                        ...styles.title,
+                        fontSize: isMobile ? "18px" : "20px",
+                        color: darkMode ? "#ffffff" : "#222222",
+                        marginBottom: "12px",
+                      }}
+                    >
+                      <a
+                        href="https://bernard-haryanto.vercel.app/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onMouseEnter={(e) =>
+                          (e.currentTarget.style.textDecoration = "underline")
+                        }
+                        onMouseLeave={(e) =>
+                          (e.currentTarget.style.textDecoration = "none")
+                        }
+                      >
+                        macOS Web Desktop Clone – Multi-App Frontend Environment
+                      </a>
+                    </h3>
+
+                    <div
+                      style={{
+                        fontSize: "16px",
+                        color: darkMode ? "#e2e8f0" : "#555555",
+                        marginBottom: "24px",
+                      }}
+                    >
+                      A personal frontend project that recreates a macOS-style
+                      desktop experience in the browser, built with Next.js and
+                      TypeScript, and deployed on Vercel. The interface supports
+                      multiple "apps" running inside draggable/resizable
+                      windows, demonstrating desktop-like UI patterns on the
+                      web.
+                    </div>
+
+                    <ul style={styles.list}>
+                      <li style={styles.listItem}>
+                        <span style={styles.listItemDot}></span>
+                        Built core apps including a Spotify-style music player
+                        UI, PDF viewer with custom rendering (pdfjs-dist), and
+                        image viewer inside a unified desktop shell with window
+                        management.
+                      </li>
+                      <li style={styles.listItem}>
+                        <span style={styles.listItemDot}></span>
+                        Architected the frontend with Next.js App Router
+                        structure, using React Context for state management and
+                        conditional rendering to handle multiple app windows
+                        within a single-page application.
+                      </li>
+                      <li style={styles.listItem}>
+                        <span style={styles.listItemDot}></span>
+                        Implemented window management (open/close, focus,
+                        positioning, z-index stacking) to mimic desktop behavior
+                        and maintain shared state across apps using custom hooks
+                        and refs.
+                      </li>
+                      <li style={{ ...styles.listItem, marginBottom: 0 }}>
+                        <span style={styles.listItemDot}></span>
+                        Tech Stack: Next.js, TypeScript, React, Tailwind CSS,
+                        pdfjs-dist, Vercel
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
               {/* TeamCheckr */}
               <div style={styles.card}>
                 <div
